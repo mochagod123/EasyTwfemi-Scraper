@@ -37,9 +37,9 @@ class Twfemi():
 class TwfemiAsync():
 
     async def __init__(self):
-        self.html = self.GetTwfemiTweetHTML(self.GetTwfemiSite())
-        self.titles = self.GetTwfemiTweetTitle(self.html)
-        self.urls = self.GetTwfemiTweetURLs(self.html)
+        self.html = await self.GetTwfemiTweetHTML(self.GetTwfemiSite())
+        self.titles = await self.GetTwfemiTweetTitle(self.html)
+        self.urls = await self.GetTwfemiTweetURLs(self.html)
 
     async def GetTwfemiSite(self):
         async with aiohttp.ClientSession() as session:
