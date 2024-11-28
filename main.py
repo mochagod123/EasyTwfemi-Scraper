@@ -33,35 +33,3 @@ class Twfemi():
             title = u.find('a')
             twt.append(title["href"])
         return twt
-    
-class TwfemiAsync():
-
-    async def __init__(self):
-        self.html = await self.GetTwfemiTweetHTML(self.GetTwfemiSite())
-        self.titles = await self.GetTwfemiTweetTitle(self.html)
-        self.urls = await self.GetTwfemiTweetURLs(self.html)
-
-    async def GetTwfemiSite(self):
-        async with aiohttp.ClientSession() as session:
-            async with session.get(f"https://togetter.com/t/%E3%83%84%E3%82%A4%E3%83%95%E3%82%A7%E3%83%9F") as response:
-                return await response.text()
-
-    async def GetTwfemiTweetHTML(self, site: str):
-        soup=BeautifulSoup(site, "html.parser")
-        html = soup.find('div', {'class', "left contents_main"})
-        urls = html.find_all('span', {'class', "title"})
-        return urls
-
-    async def GetTwfemiTweetTitle(self, urls):
-        twt = []
-        for u in urls:
-            title = u.find('a')
-            twt.append(title.get_text())
-        return twt
-
-    async def GetTwfemiTweetURLs(self, urls):
-        twt = []
-        for u in urls:
-            title = u.find('a')
-            twt.append(title["href"])
-        return twt
